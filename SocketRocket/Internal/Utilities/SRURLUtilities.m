@@ -47,8 +47,15 @@ extern NSString *_Nullable SRBasicAuthorizationHeaderFromURL(NSURL *url)
         return nil;
     }
 
-    NSData *data = [[NSString stringWithFormat:@"%@:%@", url.user, url.password] dataUsingEncoding:NSUTF8StringEncoding];
-    return [NSString stringWithFormat:@"Basic %@", SRBase64EncodedStringFromData(data)];
+    if (@available(iOS 17, *)) {
+        NSString *parsedPassword = [url.password stringByRemovingPercentEncoding];
+        NSData *data = [[NSString stringWithFormat:@"%@:%@", url.user, parsedPassword] dataUsingEncoding:NSUTF8StringEncoding];
+        return [NSString stringWithFormat:@"Basic %@", SRBase64EncodedStringFromData(data)];
+    } else {
+        NSData *data = [[NSString stringWithFormat:@"%@:%@", url.user, url.password] dataUsingEncoding:NSUTF8StringEncoding];
+        return [NSString stringWithFormat:@"Basic %@", SRBase64EncodedStringFromData(data)];
+    }
+    
 }
 
 extern NSString *_Nullable SRStreamNetworkServiceTypeFromURLRequest(NSURLRequest *request)
