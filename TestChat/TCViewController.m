@@ -9,7 +9,7 @@
 
 #import "TCViewController.h"
 
-#import <SocketRocket/SocketRocket.h>
+#import <RevelSocketRocket/SocketRocket.h>
 
 #import "TCChatCell.h"
 
