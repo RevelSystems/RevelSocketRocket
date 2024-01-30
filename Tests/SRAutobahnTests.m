@@ -12,7 +12,7 @@
 @import XCTest;
 @import ObjectiveC;
 
-#import <SocketRocket/SRWebSocket.h>
+#import <RevelSocketRocket/SRWebSocket.h>
 
 #import "SRTWebSocketOperation.h"
 #import "SRAutobahnOperation.h"
